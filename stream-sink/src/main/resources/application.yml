@@ -1,0 +1,27 @@
+spring:
+
+  application:
+    name: cloud-stream-sink
+
+  # RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  # RabbitMQ - channel
+  cloud.stream:
+    bindings:
+      delta:
+        content-type: application/json;charset=UTF-8
+        destination: delta
+        group: sample
+        consumer:
+          concurrency: 3
+          max-attempts: 3
+
+    rabbit.bindings.notification.consumer:
+      auto-bind-dlq: true
+      republish-to-dlq: true
+      acknowledge-mode: AUTO # NONE, MANUAL, AUTO

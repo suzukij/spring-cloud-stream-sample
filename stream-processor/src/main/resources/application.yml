@@ -1,0 +1,43 @@
+spring:
+
+  application:
+    name: cloud-stream-processor
+
+  # RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  # RabbitMQ - channel
+  cloud.stream:
+    bindings:
+      alpha:
+        content-type: application/json;charset=UTF-8
+        destination: alpha
+        group: sample
+        consumer:
+          concurrency: 3
+          max-attempts: 3
+
+      bravo:
+        content-type: application/json;charset=UTF-8
+        destination: bravo
+        group: sample
+        consumer:
+          concurrency: 1
+          max-attempts: 3
+
+      charlie:
+        content-type: application/json;charset=UTF-8
+        destination: charlie
+        group: sample
+        consumer:
+          concurrency: 1
+          max-attempts: 3
+
+    rabbit.bindings.notification.consumer:
+      auto-bind-dlq: true
+      republish-to-dlq: true
+      acknowledge-mode: AUTO # NONE, MANUAL, AUTO

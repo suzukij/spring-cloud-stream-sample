@@ -1,0 +1,7 @@
+stream-processor/.idea/
+stream-processor/target/
+stream-sink/.idea/
+stream-sink/target/
+stream-source/.idea/
+stream-source/target/
+*.iml
